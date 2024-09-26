@@ -14,6 +14,13 @@ import {
   getUpdates,
   updateUpdate,
 } from './handlers/update';
+import {
+  createUpdatePoint,
+  deleteUpdatePoint,
+  getOneUpdatePoint,
+  getUpdatePoints,
+  updateUpdatePoint,
+} from './handlers/updatePoint';
 
 const router = Router();
 
@@ -68,14 +75,14 @@ router.delete('/update/:id', deleteUpdate);
 /**
  * Update point Routes
  */
-router.get('/updatepoint', () => {});
-router.get('/updatepoint/:id', () => {});
+router.get('/updatepoint', getUpdatePoints);
+router.get('/updatepoint/:id', getOneUpdatePoint);
 router.put(
   '/updatepoint/:id',
   body('name').optional().isString(),
   body('description').optional().isString(),
   handleInputErrors,
-  (req, res) => {}
+  updateUpdatePoint
 );
 router.post(
   '/updatepoint',
@@ -83,8 +90,12 @@ router.post(
   body('description').isString(),
   body('updateId').exists().isString(),
   handleInputErrors,
-  (req, res) => {}
+  createUpdatePoint
 );
-router.delete('/updatepoint/:id', () => {});
+router.delete('/updatepoint/:id', deleteUpdatePoint);
 
+router.use((err, req, res, next) => {
+  console.log(err)
+  res.json({message: "router handler"})
+})
 export default router;

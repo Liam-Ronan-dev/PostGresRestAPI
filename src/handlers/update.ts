@@ -16,7 +16,7 @@ export const getUpdates = async (req, res) => {
   const updates = products.reduce((allUpdates, product) => {
     return [...allUpdates, ...product.updates];
   }, []);
-  res.json({ data: products });
+  res.json({ data: updates });
 };
 
 export const getOneUpdate = async (req, res) => {
