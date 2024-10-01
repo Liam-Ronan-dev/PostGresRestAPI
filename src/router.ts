@@ -33,7 +33,6 @@ router.put(
   '/product/:id',
   body('name').isString(),
   handleInputErrors,
-  (req, res) => {}
 );
 router.post(
   '/product',

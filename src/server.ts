@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 /**
  * Supertest example
  */
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
   res.json({ message: 'hello' });
 });
 
@@ -23,7 +23,7 @@ app.use('/api', protect, router);
 app.post('/user', createNewUser);
 app.post('/signin', signin);
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   if (err.type === 'auth') {
     res.status(401).json({ message: 'unauthorized' });
   } else if (err.type === 'input') {
